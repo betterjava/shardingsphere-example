@@ -39,20 +39,20 @@ import java.sql.SQLException;
 /*
  * 1. Please make sure master-slave data sync on MySQL is running correctly. Otherwise this example will query empty data from slave.
  * 2. Please make sure sharding-orchestration-reg-zookeeper-curator in your pom if registryCenterType = RegistryCenterType.ZOOKEEPER.
- * 3. Please make sure sharding-orchestration-reg-etcd in your pom if registryCenterType = RegistryCenterType.ETCD.
+ * 3. Please make sure sharding-orchestration-reg-nacos in your pom if registryCenterType = RegistryCenterType.NACOS.
  */
 public class JavaConfigurationExampleMain {
-    
+
     private static ShardingType shardingType = ShardingType.SHARDING_DATABASES_AND_TABLES;
 //    private static ShardingType shardingType = ShardingType.MASTER_SLAVE;
 //    private static ShardingType shardingType = ShardingType.ENCRYPT;
-    
+
     private static boolean loadConfigFromRegCenter = false;
 //    private static boolean loadConfigFromRegCenter = true;
-    
-    private static RegistryCenterType registryCenterType = RegistryCenterType.ZOOKEEPER;
-    //    private static RegistryCenterType registryCenterType = RegistryCenterType.ETCD;
-    
+
+        private static RegistryCenterType registryCenterType = RegistryCenterType.ZOOKEEPER;
+//    private static RegistryCenterType registryCenterType = RegistryCenterType.NACOS;
+
     public static void main(final String[] args) throws Exception {
         DataSource dataSource = getDataSource(shardingType, loadConfigFromRegCenter);
         try {
@@ -61,7 +61,7 @@ public class JavaConfigurationExampleMain {
             closeDataSource(dataSource);
         }
     }
-    
+
     private static DataSource getDataSource(final ShardingType shardingType, final boolean loadConfigFromRegCenter) throws SQLException {
         RegistryCenterConfiguration registryCenterConfig = getRegistryCenterConfiguration(registryCenterType);
         ExampleConfiguration configuration;
@@ -81,15 +81,15 @@ public class JavaConfigurationExampleMain {
         }
         return configuration.getDataSource();
     }
-    
+
     private static RegistryCenterConfiguration getRegistryCenterConfiguration(final RegistryCenterType registryCenterType) {
-        return RegistryCenterType.ZOOKEEPER == registryCenterType ? RegistryCenterConfigurationUtil.getZooKeeperConfiguration() : RegistryCenterConfigurationUtil.getEtcdConfiguration();
+        return RegistryCenterType.ZOOKEEPER == registryCenterType ? RegistryCenterConfigurationUtil.getZooKeeperConfiguration() : RegistryCenterConfigurationUtil.getNacosConfiguration();
     }
-    
+
     private static ExampleService getExampleService(final DataSource dataSource) {
         return new OrderServiceImpl(dataSource);
     }
-    
+
     private static void closeDataSource(final DataSource dataSource) throws Exception {
         if (dataSource instanceof AbstractDataSourceAdapter) {
             ((AbstractDataSourceAdapter) dataSource).close();

@@ -21,4 +21,15 @@ masterSlaveRule:
   slaveDataSourceNames: [ds_slave_0, ds_slave_1]
 
 props:
-  sql.show: false
+  sql.show: true
+
+orchestration:
+  name: demo_yaml_ds_ms
+  overwrite: true
+  registry:
+    type: nacos
+    serverLists: localhost:8848
+    namespace:
+    props:
+      group: SHARDING_SPHERE_DEFAULT_GROUP
+      timeout: 3000

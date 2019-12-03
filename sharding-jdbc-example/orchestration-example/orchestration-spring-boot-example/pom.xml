@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.apache.shardingsphere.example</groupId>
         <artifactId>orchestration-example</artifactId>
-        <version>4.0.0-RC3-SNAPSHOT</version>
+        <version>4.0.0-RC4-SNAPSHOT</version>
     </parent>
     <artifactId>orchestration-spring-boot-example</artifactId>
     <name>Example::orchestration::spring-boot</name>
@@ -25,10 +25,16 @@
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-orchestration-reg-zookeeper-curator</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>io.shardingsphere</groupId>-->
-            <!--<artifactId>sharding-orchestration-reg-etcd</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-orchestration-reg-nacos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.apache.shardingsphere.example</groupId>
         <artifactId>transaction-example</artifactId>
-        <version>4.0.0-RC3-SNAPSHOT</version>
+        <version>4.0.0-RC4-SNAPSHOT</version>
     </parent>
     <artifactId>transaction-2pc-xa-raw-jdbc-example</artifactId>
     <name>Example::transaction::2pc-xa-raw-jdbc</name>
@@ -24,6 +24,10 @@
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-transaction-xa-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
         </dependency>
     </dependencies>
 </project>
